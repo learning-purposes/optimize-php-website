@@ -3,8 +3,8 @@
 {% block content %} 	
 	<div class="p-2 box border-bottom mb-5">
 		<div class="container d-flex align-items-center">
-			<a href="/">Home</a>
-			<img src="img/circle-arrow.svg" class="icon-tiny mx-2" alt="Arrow in a circle">
+			<a href="/mle">Home</a>
+			<img src="/mle/img/circle-arrow.svg" class="icon-tiny mx-2" alt="Arrow in a circle">
 			<span>Products</span>
 		</div>
 	</div>
@@ -54,9 +54,9 @@
 			{% for i in range(1, 30) -%}
 				<div class="col-sm-7 col-md-4 col-lg-3 mb-3 mb-md-5">
 					<picture>
-						<source srcset="/img/product-images/{{ i }}-sml.jpg" type="image/jpg" media="(max-width: 450px)" />
-						<source srcset="/img/product-images/{{ i }}.jpg" type="image/jpg" media="(max-width: 575px)" />
-						<img src="/img/product-images/{{ i }}-sml.jpg" alt="product image {{ i }}">
+						<source srcset="/mle/img/product-images/{{ i }}-sml.jpg" type="image/jpg" media="(max-width: 450px)" />
+						<source srcset="/mle/img/product-images/{{ i }}.jpg" type="image/jpg" media="(max-width: 575px)" />
+						<img src="/mle/img/product-images/{{ i }}-sml.jpg" alt="product image {{ i }}">
 					</picture>
 				</div>
 				<div class="col-md-8 col-lg-7 mb-5">
@@ -67,7 +67,7 @@
 					</button>
 					<button class="btn btn-mle-red btn-sm-block">
 						Buy Now
-						<img src="img/circle-arrow-white.svg" class="icon-tiny ml-1" alt="Arrow in a circle">
+						<img src="/mle/img/circle-arrow-white.svg" class="icon-tiny ml-1" alt="Arrow in a circle">
 					</button>
 				</div>
 			{% endfor %}
