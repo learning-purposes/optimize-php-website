@@ -299,9 +299,8 @@ Blog Header
 */
 
 .blog-header {
-	background-image: url('/img/blog-post-banner.jpg');
-	background-size: auto 140%;
-	background-position: center;
+	background: url('/img/blog-post-banner-sml.jpg') center;
+	background-size: cover;
 	position: relative;
 	height: 300px;
 	display: flex;
@@ -319,9 +318,9 @@ Blog Header
 	height: 100%;
 }
 
-@media (min-width: 575px) {
+@media (min-width: 600px) {
 	.blog-header {
-		background-size: cover;
+		background-image: url('/img/blog-post-banner.jpg');
 	}
 }
 
