@@ -25,7 +25,12 @@
     "esm": "^3.2.25",
     "glob": "^7.1.6",
     "gulp": "^4.0.2",
+    "gulp-imagemin": "^7.1.0",
     "gulp-nunjucks": "^5.0.1",
     "rimraf": "^3.0.0"
+  },
+  "dependencies": {
+    "gulp-rename": "^2.0.0",
+    "imagemin-webp": "^6.0.0"
   }
 }
