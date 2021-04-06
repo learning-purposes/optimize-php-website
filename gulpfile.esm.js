@@ -5,9 +5,10 @@ import imageminWebp from 'imagemin-webp';
 import rename from 'gulp-rename';
 import nunjucks from 'gulp-nunjucks';
 import rimraf from 'rimraf';
+import sass from 'gulp-sass';
 
 function clean() {
-	return glob('./www/*.{html,jpg,svg,webP}', {}, function(er, files) {
+	return glob('./www/*.{html,jpg,svg,webP,css}', {}, function(er, files) {
 		for(let file in files) {
 			rimraf(files[file], () => {});
 		}
@@ -38,7 +39,15 @@ function createWebP() {
 	}))
 	.pipe(gulp.dest('www/img'));
 }
-const build = gulp.series(clean, compileNunjucks, compressImages, createWebP);
+
+function compileSass() {
+	return gulp.src('./src/scss/main.scss')
+		.pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+		.pipe(rename('style.css'))
+		.pipe(gulp.dest('./www/'))
+}
+
+const build = gulp.series(clean, compileNunjucks, compressImages, createWebP, compileSass);
 
 export {
 	build
