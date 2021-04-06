@@ -6,9 +6,13 @@ import rename from 'gulp-rename';
 import nunjucks from 'gulp-nunjucks';
 import rimraf from 'rimraf';
 import sass from 'gulp-sass';
+const rollup = require('rollup');
+import { nodeResolve } from '@rollup/plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
+
 
 function clean() {
-	return glob('./www/*.{html,jpg,svg,webP,css}', {}, function(er, files) {
+	return glob('./www/*.{html,jpg,svg,webP,css,js}', {}, function(er, files) {
 		for(let file in files) {
 			rimraf(files[file], () => {});
 		}
@@ -47,7 +51,18 @@ function compileSass() {
 		.pipe(gulp.dest('./www/'))
 }
 
-const build = gulp.series(clean, compileNunjucks, compressImages, createWebP, compileSass);
+async function bundleJavaScript() {
+	const bundle = await rollup.rollup({
+		input: './src/js/main.js',
+		plugins:[nodeResolve(),terser()]
+	})
+	await bundle.write({
+		file: './www/main.js',
+		format: 'iife'
+	});
+}
+
+const build = gulp.series(clean, compileNunjucks, compressImages, createWebP, compileSass, bundleJavaScript);
 
 export {
 	build
