@@ -19,6 +19,7 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^11.2.1",
     "bootstrap": "^4.4.1",
+    "critical": "^3.0.0",
     "eslint": "^7.23.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
