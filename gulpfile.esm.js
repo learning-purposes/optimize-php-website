@@ -9,6 +9,8 @@ import sass from 'gulp-sass';
 const rollup = require('rollup');
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
+import critical from 'critical';
+import path from 'path';
 
 
 function clean() {
@@ -62,7 +64,26 @@ async function bundleJavaScript() {
 	});
 }
 
-const build = gulp.series(clean, compileNunjucks, compressImages, createWebP, compileSass, bundleJavaScript);
+function generateCriticalCSS() {
+	return glob('./www/*.html', {}, function (er, files) {
+		for (let file in files) {
+			const filename = path.basename(files[file]);
+			critical.generate({
+				inline: true,
+				base: 'www/',
+				src: filename,
+				target: filename,
+				width: 1300,
+				height: 900,
+				ignore: {
+					atrule: ['@font-face']
+				}
+			});
+		}
+	});
+}
+
+const build = gulp.series(clean, compileNunjucks, compressImages, createWebP, compileSass, bundleJavaScript, generateCriticalCSS);
 
 export {
 	build
