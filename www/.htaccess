@@ -6,7 +6,7 @@
 
     RewriteCond %{HTTP_ACCEPT} image/webp
     RewriteCond %{DOCUMENT_ROOT}/$1.webp -f
-    RewriteRule (.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=REQUEST_image]
+    RewriteRule (.*)-.*(jpg) $1.webp [T=image/webp,E=accept:1]
  </IfModule>
 
  <IfModule mod_headers.c>
@@ -16,4 +16,14 @@
 
 <IfModule mod_mime.c>
   AddType image/webp .webp
+</IfModule>
+
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+	Header set Connection keep-alive
+	Header unset ETag
+	<FilesMatch "\.(jpg|jpeg|gif|png|webp|svg|css|js|ico|woff|woff2)">
+		Header set Cache-Control "max-age=31536000, immutable"
+	</FilesMatch>
 </IfModule>
