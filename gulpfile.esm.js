@@ -74,10 +74,7 @@ function generateCriticalCSS() {
 				src: filename,
 				target: filename,
 				width: 1300,
-				height: 900,
-				ignore: {
-					atrule: ['@font-face']
-				}
+				height: 900
 			});
 		}
 	});
